@@ -48,7 +48,7 @@ def registerPlayer(name):
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("INSERT INTO players values ('%s');" % name)
+    c.execute("INSERT INTO players (name) values (%s)", (name,))
     conn.commit()
     conn.close()
 
