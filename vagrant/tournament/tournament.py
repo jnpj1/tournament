@@ -48,7 +48,7 @@ def registerPlayer(name):
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("INSERT INTO players (name) values (%s)", (name,))
+    c.execute("INSERT INTO players values (%s);", (name,))
     conn.commit()
     conn.close()
 
@@ -87,7 +87,7 @@ def reportMatch(winner, loser):
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("INSERT INTO matches values ('%s', '%s');" % (winner, loser))
+    c.execute("INSERT INTO matches values ('%s', '%s');", (winner, loser,))
     conn.commit()
     conn.close()
 
