@@ -71,7 +71,8 @@ def playerStandings():
     c = conn.cursor()
     QUERY = """SELECT players.id, players.name, count(CASE players.id WHEN winner
         THEN 1 ELSE NULL END) AS wins, count(matches.id) AS matches FROM players
-        LEFT JOIN matches ON players.id IN (winner, loser) GROUP BY players.id;"""
+        LEFT JOIN matches ON players.id IN (winner, loser) GROUP BY players.id
+        ORDER BY wins DESC;"""
     c.execute(QUERY)
     standings = c.fetchall()
     conn.commit()
@@ -107,5 +108,5 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-
-
+    current_standings = playerStandings()
+    pairings = []
